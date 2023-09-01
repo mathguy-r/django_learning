@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{%block title%}
+Read | Blogs
+{%endblock%}
+{% block content%}
+<div class="container text-center mt-3 mb-lg-3">
+<article class="blog-post">
+    <h2 class="display-5 link-body-emphasis mb-1">{{object.blog_title}}</h2>
+    <p class="blog-post-meta">January 1, 2021 by <a href="#">{{object.author.first_name}} {{object.author.last_name}}</a></p>
+<hr>
+    <p>{{object.blog_content}}</p>
+</article>
+    <br>      
+<hr>
+<footer>
+    <a class="btn btn-primary" href="{% url 'blogpage' %}">Back</a>
+</footer>
+</div>
+{% endblock %}

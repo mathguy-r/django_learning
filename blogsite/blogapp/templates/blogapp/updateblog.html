@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{%block title%}
+Edit | Blogs
+{%endblock%}
+
+{%block content%}
+
+<div class="container text-center mt-3 mb-lg-3">
+    <h1> Update {{object.blog_title}} </h1>
+</div>
+<div class="container text-center mt-3 mb-lg-3">
+<form method='post'>
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="btn btn-primary">Update</button>
+</form>
+</div>
+
+{%endblock%}

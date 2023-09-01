@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{%block title%}
+Blogs
+{%endblock%}
+{%block content%}
+<div class="container text-center mt-3 mb-lg-3">
+    <h1> Blogs </h1>
+</div>
+<div class="container d-md-flex justify-content-end ms-3 mb-lg-3">
+    <a href="{% url 'blog-create' %}">
+        <button type="button" class="btn btn-sm btn-primary">
+        Add New
+        </button></a>
+</div>
+<div class="container justify-content-center mt-3 pt-2">
+    <div class="row m-3">
+        {% for post in object_list %}
+        <div class="col-sm-4 p-2">
+            <div class="card">
+                <div class="card-body card-link">
+                    <a href="{% url 'blog-read' post.pk %}">
+                        <h5 class="card-title">{{post.blog_title}}</h5>
+                    </a>
+                    <p class="card-text small"><i>By: {{post.author.first_name}} {{post.author.last_name}}</i></p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'blog-update' post.pk %}">
+                        <button type="button" class="btn btn-sm btn-primary">
+                        Edit
+                    </button></a>
+                    <a href="{% url 'blog-delete' post.pk %}"> 
+                    <button type="button" class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Delete
+                    </button>
+                </a>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+    </div>
+</div>
+{%endblock%}
+
