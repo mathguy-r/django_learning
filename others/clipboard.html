@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>copy-to-clipboard</title>
+</head>
+
+<body>
+    <div name="container-header-with-copy-btn">
+        Click to copy &rarr;
+        <span><a href="#" style="margin-left: 2px; cursor: pointer; font-size: x-large;" onclick="copyContent()">&#128203;</a></span>
+        <span id="tooltiptext" style="visibility: hidden;"><small>Copied !!</small></span>
+    </div>
+    <div data-stale="false" width="704" class="custom-element-container">
+        <div class="stMarkdown" style="width: 704px;">
+            <div class="custom-content-block">
+                <h2 class="custom-list-header">This is header text</h2>
+                <ul>
+                    <li>first</li>
+                    <li>second</li>
+                    <li>third</li>
+                </ul>
+            </div>
+            <div class="custom-content-block">
+                <h2 class="custom-list-header">This is another header text</h2>
+                <ul>
+                    <li>one</li>
+                    <li>two</li>
+                    <li>three</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let cblocks = document.querySelectorAll('.custom-content-block');
+        let text = "";
+        for (let i = 0; i < cblocks.length; i++) { text = text + cblocks[i].innerText.replace(/\n/g, '\n- ') + '\n\n' };
+        const copyContent = async () => {
+            try {
+                await navigator.clipboard.writeText(text);
+                let tooltip = document.getElementById('tooltiptext');
+                tooltip.style.visibility = 'visible';
+                setTimeout(() => {
+                    tooltip.style.visibility = 'hidden';
+                }, 500);
+                console.log('Content copied to clipboard');
+            } catch (err) {
+                console.error('Failed to copy: ', err);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+.custom-element-container {
+    width: 704px;
+    position: relative;
+    margin: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.stMarkdown {
+    font-size: 1rem;
+    font-family: "Source Sans Pro", sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    text-size-adjust: 100%;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: auto;
+    color: rgb(49, 51, 63);
+    box-sizing: border-box;
+    width: 704px;
+}
+
+.custom-content-block {
+    margin-bottom: 0.5rem;
+}
+
+.custom-list-header {
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin-bottom: -0.50rem;
+}
