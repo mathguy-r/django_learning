@@ -3,35 +3,44 @@ from django.http import HttpResponse
 from .models import Author, BlogContent
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth import decorators, mixins
+from .forms import BlogContentForm
 
 # Create your views here.
 
 def index(request):
-    return render(request,'index.html',{"name":"index"})
+    return render(request,'index.html')
 
+@decorators.login_required(login_url = '/auth/login')
 def contact(request):
     return render(request,'contact.html',{"name":"contact"})
 
-class BlogpageView(ListView):
+class BlogpageView(mixins.LoginRequiredMixin, ListView):
+    login_url = '/auth/login'
     model = BlogContent
     template_name = 'blogpage.html'
 
-class BlogContentView(DetailView):
+class BlogContentView(mixins.LoginRequiredMixin, DetailView):
+    login_url = '/auth/login'
     model = BlogContent
     template_name = 'blogcontent.html'
 
-class CreateBlogView(CreateView):
+class CreateBlogView(mixins.LoginRequiredMixin, CreateView):
+    login_url = '/auth/login'
     model = BlogContent
     template_name = 'createblog.html'
-    fields = '__all__'
+    form_class = BlogContentForm
 
-class UpdateBlogView(UpdateView):
+class UpdateBlogView(mixins.LoginRequiredMixin, UpdateView):
+    login_url = '/auth/login'
     model = BlogContent
     template_name = 'updateblog.html'
-    fields = '__all__'
+    form_class = BlogContentForm
 
-class DeleteBlogView(DeleteView):
+class DeleteBlogView(mixins.LoginRequiredMixin, DeleteView):
+    login_url = '/auth/login'
     model = BlogContent
+    form_class = BlogContentForm
     template_name = 'deleteblog.html'
     success_url = reverse_lazy('blogpage')
 

@@ -1,11 +1,59 @@
-{%block content%}
+{% extends 'base_bootstrap.html' %}
 
-<h1> Sign Up </h1>
+{%block title%}
+Register | BlogSite
+{%endblock%}
 
-<form method='POST'>
-    {% csrf_token %}
-    {{form.as_p}}
-    <button>Register</button>
-</form>
+{%block base_content%}
 
+<div class="modal fade" id="onload" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content d-flex justify-content-center">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Register</h5>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form method="POST" class="needs-validation" novalidate>
+                        {% csrf_token %}                        
+                        {{form.as_div}}
+                        <button type="submit" class="btn btn-primary mt-3">Register</button>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                Already an user? <a href="{% url 'login' %}">Login</a> now </p>
+            </div>
+        </div>
+    </div>
+</div> <!-- And the relavant closing div tag -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<!-- modal test  -->
+<script type="text/javascript">
+    window.onload = () => {
+        $('#onload').modal('show');
+    }
+</script>
+<script>
+    (() => {
+        'use strict'
+
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        const forms = document.querySelectorAll('.needs-validation')
+
+        // Loop over them and prevent submission
+        Array.from(forms).forEach(form => {
+            form.addEventListener('submit', event => {
+                if (!form.checkValidity()) {
+                    event.preventDefault()
+                    event.stopPropagation()
+                }
+
+                form.classList.add('was-validated')
+            }, false)
+        })
+    })()
+</script>
 {%endblock%}
